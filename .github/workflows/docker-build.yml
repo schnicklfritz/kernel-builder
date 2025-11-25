@@ -23,6 +23,6 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           push: true
-          tags: yourusername/kernel-builder:latest
+          tags: schnicklbob/kernel-builder:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
