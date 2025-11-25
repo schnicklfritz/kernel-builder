@@ -2,14 +2,15 @@ FROM archlinux:latest
 
 # Initialize pacman and update
 RUN pacman-key --init && \
-    pacman -Syu --noconfirm curl
+    pacman -Sy --noconfirm archlinux-keyring && \
+    pacman -Syu --noconfirm curl tar
 
-# CachyOS repo setup (official method)
+# CachyOS repo setup (non-interactive)
 RUN curl -fsSL https://mirror.cachyos.org/cachyos-repo.tar.xz -o /tmp/cachyos-repo.tar.xz && \
     cd /tmp && \
     tar xvf cachyos-repo.tar.xz && \
     cd cachyos-repo && \
-    ./cachyos-repo.sh
+    yes | ./cachyos-repo.sh
 
 # Install build dependencies
 RUN pacman -Syu --noconfirm \
@@ -37,11 +38,9 @@ RUN git clone --depth 1 https://github.com/CachyOS/linux.git /usr/src/linux
 
 WORKDIR /usr/src/linux
 
-# Your .config gets mounted or pulled from repo
 VOLUME /config
 VOLUME /output
 
-# Entry point for builds
 COPY build.sh /build.sh
 RUN chmod +x /build.sh
 
