@@ -45,3 +45,4 @@ COPY build.sh /build.sh
 RUN chmod +x /build.sh
 
 CMD ["/build.sh"]
+
