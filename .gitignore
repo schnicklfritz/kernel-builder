@@ -1,0 +1,21 @@
+# Build outputs
+output/
+*.ko
+*.o
+vmlinuz-*
+*.zst
+*.tar.xz
+
+# Kernel build artifacts
+.config.old
+.version
+Module.symvers
+modules.order
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# Local secrets
+.env
